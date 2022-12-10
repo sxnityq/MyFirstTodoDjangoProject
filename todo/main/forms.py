@@ -1,9 +1,35 @@
-from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate
 from .models import CustomUser
 from .utils import *
 
 from django import forms
+from django.core.exceptions import ValidationError
+
+class CustomAuthForm(AuthenticationForm):
+    
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
+
+        if email is not None and password:
+            self.user_cache = authenticate(
+                self.request,
+                email=email,
+                password=password
+            )
+            
+            if not self.user_cache.email_verify:
+                custom_send_mail(self.request, self.user_cache)
+                raise ValidationError('email not verify? Check your email',
+                                      code='invalid_login')
+            
+            if self.user_cache is None:
+                raise self.get_invalid_login_error()
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
 
 class RegisterUserForm(UserCreationForm):
     

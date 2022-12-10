@@ -1,0 +1,7 @@
+{%autoescape off%}
+
+Добрый день, перейдите по ссылке чтобы верифицироваться
+http://{{ domain }}{% url 'verify_url' uidb64=uidb64 token=token %}
+
+
+{%endautoescape%}

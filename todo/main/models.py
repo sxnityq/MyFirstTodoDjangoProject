@@ -33,7 +33,6 @@ class CustomUser(AbstractUser):
     data_joined = models.DateTimeField(auto_now_add=True, verbose_name="date joined")
     profile_image = models.ImageField(upload_to=get_profile_image_filepath,blank=True, null=True, default=get_user_default_profile_image)
     email_verify = models.BooleanField(default=False)
-    
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'

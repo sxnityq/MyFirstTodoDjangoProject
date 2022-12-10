@@ -22,4 +22,7 @@ urlpatterns = [
     path('reset-password-sent/', view=auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>', view=auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset-password-complete', view=auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    
+    path('verify_email/<uidb64>/<token>', view=EmailVerify.as_view(), name='verify_url'),
+    path('confirm_email/', view=TemplateView.as_view(template_name='main/registration/confirm_email.html'), name='confirm_email' )
 ]
