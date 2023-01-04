@@ -1,10 +1,10 @@
+from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.core.exceptions import ValidationError
+
 from .models import CustomUser
 from .utils import custom_send_mail
-
-from django import forms
-from django.core.exceptions import ValidationError
 
 
 class CustomAuthForm(AuthenticationForm):

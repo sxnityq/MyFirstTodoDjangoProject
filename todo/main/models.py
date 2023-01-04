@@ -1,10 +1,8 @@
+from django.contrib.auth.models import (AbstractUser, BaseUserManager)
 from django.db import models
-from django.contrib.auth.models import (AbstractUser,
-                                        BaseUserManager)
 
 from .utils import (get_profile_image_filepath,
                     get_user_default_profile_image)
-# Create your models here.
 
 
 class CustomUserManager(BaseUserManager):

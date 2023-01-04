@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
-from .models import ToDoModels, CustomUser
+from .models import CustomUser, ToDoModels
 
 
 class CustomUserAdmin(UserAdmin):

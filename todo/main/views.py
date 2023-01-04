@@ -1,24 +1,19 @@
-from django.shortcuts import render, redirect
-
-from django.db.models import Q
-
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.tokens import default_token_generator as token_generator
-
+from django.contrib.auth.views import LoginView
+from django.core.exceptions import ValidationError
+from django.db.models import Q
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
+from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 
-from django.core.exceptions import ValidationError
-
+from .forms import (CustomAuthForm, CustomUser, RegisterUserForm, UpdateUserProfile)
 from .models import ToDoModels
-from .forms import (CustomAuthForm, CustomUser,
-                    RegisterUserForm, UpdateUserProfile)
 from .utils import custom_send_mail
 # Create your views here.
 
