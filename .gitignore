@@ -1,3 +1,4 @@
 TodoVenv/
 __pycache__/
 *py?
+flake8
