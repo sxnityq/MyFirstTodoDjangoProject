@@ -8,33 +8,34 @@ from django.core.mail import EmailMessage
 
 from django.conf import settings
 
+
 def get_user_default_profile_image():
     return "default/default_user_profile.jpg"
+
 
 def get_profile_image_filepath(self, filename):
     return f"profile_images/{self.pk}/{filename}"
 
+
 def custom_send_mail(request, user):
-    
+
     current_site = get_current_site(request)
-    
+
     context = {
-        'token' : default_token_generator.make_token(user),
-        'uidb64' : urlsafe_base64_encode(force_bytes(user.pk)),
-        'user' : user,
-        'domain' : current_site
+        'token': default_token_generator.make_token(user),
+        'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
+        'user': user,
+        'domain': current_site
     }
-    
-    message = render_to_string(
-                template_name='main/registration/verify_email.html',
-                context=context,
-                request=request )
-    
-    TheMail = EmailMessage(
-        subject=f'VERIFY MESSAGE',
+
+    message = render_to_string(template_name='main/registration/verify_email.html',
+                               context=context,
+                               request=request)
+
+    the_mail = EmailMessage(
+        subject='VERIFY MESSAGE',
         body=message,
         from_email=settings.EMAIL_HOST_USER,
-        to=[user.email,]
+        to=[user.email, ]
     )
-    print(user.email)
-    TheMail.send()
+    the_mail.send()
